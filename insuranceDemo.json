@@ -1,0 +1,103 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Title",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.server.test/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "QuoteRequest",
+      "description": "All insurance quote requests"
+    }
+  ],
+  "paths": {
+    "/housholdInsurance": {
+      "post": {
+        "tags": [
+          "QuoteRequest"
+        ],
+        "requestBody": {
+          "description": "Create a quote request for a household and private liability insurance",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuoteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Quote Request successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuoteResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "QuoteRequest": {
+        "type": "object",
+        "properties": {
+          "postalCode": {
+            "type": "integer",
+            "description": "The postal code of the insurance requesters home in switzerland",
+            "example": 4052
+          },
+          "numberOfRooms": {
+            "type": "number",
+            "description": "The number of rooms of the insurance requesters home",
+            "example": 4.5
+          },
+          "numberOfAdults": {
+            "type": "integer",
+            "description": "The number of people older than 14 years who live together, including the insurance requester",
+            "example": 2
+          },
+          "numberOfChildren": {
+            "type": "integer",
+            "description": "The number of people younger than 14 years who live together with the insurance requester",
+            "example": 2
+          },
+          "birthdate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date of birth of the insurance requester"
+          }
+        }
+      },
+      "QuoteResult": {
+        "type": "object",
+        "properties": {
+          "PackageS": {
+            "type": "number",
+            "description": "Premium for the smallest PackageS",
+            "example": 123.4
+          },
+          "PackageM": {
+            "type": "number",
+            "description": "Premium for the smallest PackageS",
+            "example": 234.5
+          },
+          "PackageL": {
+            "type": "number",
+            "description": "Premium for the smallest PackageS",
+            "example": 345.6
+          }
+        }
+      }
+    }
+  }
+}
